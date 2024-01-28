@@ -45,6 +45,16 @@ if ( ! function_exists( 'wcb_get_archive_post_type' ) ) {
 	 * @return WP_Term|null  The archive post type name or null if not in an archive page.
 	 */
 	function wcb_get_archive(): ?WP_Term {
-		return is_archive() ? get_queried_object() : null;
+		if ( ! is_archive() ) {
+			return null;
+		}
+
+		$queried_object = get_queried_object();
+
+		if ( 'WP_Term' === gettype( $queried_object ) ) {
+			return $queried_object;
+		} else {
+			return null;
+		}
 	}
 }
