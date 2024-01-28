@@ -53,6 +53,7 @@ if ( ! class_exists( 'WcbCore' ) ) {
 		private function __construct() {
 			$this->define_constants();
 			$this->actions_and_filters();
+			$this->add_term_meta();
 		}
 
 		/**
@@ -76,7 +77,7 @@ if ( ! class_exists( 'WcbCore' ) ) {
 		}
 
 		/**
-		 * Initialise Presence Forms Core.
+		 * Initialise Woo Category Banners Core.
 		 */
 		public function init(): void {
 			$this->initialise_localisation();
@@ -107,6 +108,27 @@ if ( ! class_exists( 'WcbCore' ) ) {
 
 			add_action( 'after_setup_theme', array( $this, 'pluggable' ) );
 			add_action( 'init', array( $this, 'init' ) );
+		}
+
+		/**
+		 * Add term meta data fields.
+		 *
+		 * @return void
+		 */
+		private function add_term_meta(): void {
+			include_once WCB_ABSPATH . '/includes/meta/class-term-meta.php';
+
+			$term_meta = new TermMeta(
+				'product_cat',
+				array(
+					array(
+						'id' => 'wcb_banner_image',
+						'label' => 'Banner Image',
+						'desc' => 'Banner image for the category',
+						'type' => 'image',
+					),
+				)
+			);
 		}
 	}
 }
