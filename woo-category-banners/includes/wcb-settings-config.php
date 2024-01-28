@@ -21,7 +21,21 @@ if ( ! function_exists( 'wcb_get_settings_config' ) ) {
 		return array(
 			'group_name' => 'woo_category_banners_settings',
 			'name' => 'woo_category_banners_settings',
-			'settings' => array(),
+			'settings' => array(
+				array(
+					'type'        => 'choice',
+					'id'          => 'wcb_hook',
+					'name'        => __( 'Hook for image banner', 'woo-category-banners' ),
+					'can_be_null' => false,
+					'default'     => 'woocommerce_before_main_content',
+					'hint'        => __( 'The hook to use for the category banners.', 'woo-category-banners' ),
+					'choices'     => array(
+						'woocommerce_before_main_content' => 'woocommerce_before_main_content',
+						'woocommerce_before_shop_loop' => 'woocommerce_before_shop_loop',
+						'astra_content_before' => 'astra_content_before',
+					),
+				),
+			),
 		);
 	}
 }
@@ -38,7 +52,7 @@ if ( ! function_exists( 'wcb_get_settings_screen_config' ) ) {
 			'menu_title'        => esc_html__( 'Woo Category Banners', 'woo-category-banners' ),
 			'capability_needed' => 'edit_plugins',
 			'menu_slug'         => 'wcb_admin_menu',
-			'icon'              => 'dashicons-editor-ul',
+			'icon'              => 'dashicons-cover-image',
 			'position'          => 56,
 			'settings_pages' => array(
 				array(
@@ -49,7 +63,15 @@ if ( ! function_exists( 'wcb_get_settings_screen_config' ) ) {
 					'renderer'          => function () {
 						include_once WCB_ABSPATH . 'views/woo-category-banners-dashboard-view.php';
 					},
-					'settings_sections' => array(),
+					'settings_sections' => array(
+						array(
+							'id'       => 'global_settings',
+							'name'     => __( 'Global settings', 'woo-category-banners' ),
+							'settings' => array(
+								'wcb_hook',
+							),
+						),
+					),
 				),
 			),
 		);

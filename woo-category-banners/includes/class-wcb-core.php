@@ -104,10 +104,12 @@ if ( ! class_exists( 'WcbCore' ) ) {
 		private function actions_and_filters(): void {
 			include_once WCB_ABSPATH . '/includes/class-wcb-settings.php';
 
-			WcbSettings::instance();
+			$settings = WcbSettings::instance();
 
 			add_action( 'after_setup_theme', array( $this, 'pluggable' ) );
 			add_action( 'init', array( $this, 'init' ) );
+
+			add_action( $settings->get_settings()->get_value( 'wcb_hook' ), 'wcb_output_category_banner' );
 		}
 
 		/**
