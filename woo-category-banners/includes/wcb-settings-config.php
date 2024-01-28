@@ -50,15 +50,15 @@ if ( ! function_exists( 'wcb_get_settings_screen_config' ) ) {
 		return array(
 			'page_title'        => esc_html__( 'Woo Category Banners', 'woo-category-banners' ),
 			'menu_title'        => esc_html__( 'Woo Category Banners', 'woo-category-banners' ),
-			'capability_needed' => 'edit_plugins',
+			'capability_needed' => 'manage_options',
 			'menu_slug'         => 'wcb_admin_menu',
 			'icon'              => 'dashicons-cover-image',
-			'position'          => 56,
+			'position'          => null,
 			'settings_pages' => array(
 				array(
 					'page_title'        => esc_html__( 'Woo Category Banners Dashboard', 'woo-category-banners' ),
 					'menu_title'        => esc_html__( 'Dashboard', 'woo-category-banners' ),
-					'capability_needed' => 'edit_plugins',
+					'capability_needed' => 'manage_options',
 					'menu_slug'         => 'wcb_admin_menu',
 					'renderer'          => function () {
 						include_once WCB_ABSPATH . 'views/woo-category-banners-dashboard-view.php';
