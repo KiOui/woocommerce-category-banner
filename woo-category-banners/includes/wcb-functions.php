@@ -51,7 +51,7 @@ if ( ! function_exists( 'wcb_get_archive_post_type' ) ) {
 
 		$queried_object = get_queried_object();
 
-		if ( 'WP_Term' === gettype( $queried_object ) ) {
+		if ( 'object' === gettype( $queried_object ) && 'WP_Term' === get_class( $queried_object ) ) {
 			return $queried_object;
 		} else {
 			return null;
